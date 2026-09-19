@@ -1,0 +1,7 @@
+<svg width="250" height="100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="250" height="100" x="0" y="0" fill="#282828"></rect>
+    <rect width="200" height="30" x="25" y="35" rx="5" ry="5" fill="grey"></rect>
+    <rect width="150" height="30" x="25" y="35" rx="5" ry="5" fill="red"></rect>
+	<text x="72" y="20" font-size="16" font-weight="bold" fill="white">Signal Level</text>
+	<text x="108" y="88" font-size="16" fill="white">75%</text>
+</svg> 

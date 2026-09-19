@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 int find_bit_value(unsigned char status, int position) {
+  // finds the value of the bit and returns either a 0 or 1 (its value) so it
+  // can be stored in a variable
   unsigned int bit_mask = 1 << position;
   int bit;
   bit = status & bit_mask;
