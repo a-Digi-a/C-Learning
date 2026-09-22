@@ -4,8 +4,8 @@ void adc_to_voltage(int adc_code) {
   double deltav = 3.3 / 4096;
   double low_voltage = deltav * adc_code;
   double high_voltage = deltav * (adc_code + 1);
-  printf("ADC Code: %i\n", adc_code);
-  printf("Voltage range: %f V <= Vin < %f V\n", low_voltage, high_voltage);
+  printf("ADC Code: %i\nVoltage range: %f V <= Vin < %f V\n", adc_code,
+         low_voltage, high_voltage);
 }
 
 int main() {

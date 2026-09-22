@@ -1,14 +1,12 @@
 #include <stdio.h>
 
 void print_ascii_readout_display(double voltage, double current, int channel) {
-  printf("+----------------------------+\n");
-  printf("%-8c%-21s%c\n", '|', "SENSOR MONITOR", '|');
-  printf("%-8c%-21s%c\n", '|', "INPUT \\ ADC", '|');
-  printf("%-29c%c\n", '|', '|');
-  printf("%-2c%s%-17i%c\n", '|', "Channel : ", channel, '|');
-  printf("%-2c%s%-11.3f%-6c%c\n", '|', "Voltage : ", voltage, 'V', '|');
-  printf("%-2c%s%-11.3f%-6c%c\n", '|', "Current : ", current, 'A', '|');
-  printf("+----------------------------+\n");
+  printf("+----------------------------+\n%-8c%-21s%c\n%-8c%-21s%c\n%-29c%c\n%-"
+         "2c%s%-17i%c\n%-2c%s%-11.3f%-6c%c\n%-2c%s%-11.3f%-6c%c\n+-------------"
+         "---------------+\n",
+         '|', "SENSOR MONITOR", '|', '|', "INPUT \\ ADC", '|', '|', '|', '|',
+         "Channel : ", channel, '|', '|', "Voltage : ", voltage, 'V', '|', '|',
+         "Current : ", current, 'A', '|');
 }
 
 int main() {

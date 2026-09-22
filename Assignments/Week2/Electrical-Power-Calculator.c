@@ -2,10 +2,8 @@
 
 void calculate_and_print_power(double voltage, double current) {
   double power = voltage * current;
-  // Seperate print statements for readability
-  printf("%-10s%-5.2f V\n", "Voltage:", voltage);
-  printf("%-10s%-5.2f A\n", "Current:", current);
-  printf("%-10s%-5.2f W\n", "Power:", power);
+  printf("%-10s%-5.2f V\n%-10s%-5.2f A\n%-10s%-5.2f W\n", "Voltage:", voltage,
+         "Current:", current, "Power:", power);
 }
 
 int main() {
