@@ -1,0 +1,5 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="20" width="360" height="160" fill="lightgray" stroke="black" />
+    <circle cx="80" cy="100" r="30" fill="green" stroke="black" />
+    <text x="130" y="110" font-size="28" fill="black">POWER ON</text>
+</svg>
