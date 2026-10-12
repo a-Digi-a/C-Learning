@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GeoDraw</title>
+<style>
+  canvas { border:1px solid #505050; display:block; }
+  #gdControls { width:1000px; display:none; align-items:center; gap:10px; margin:10px 0 10px 0; font-family:Arial,sans-serif; color:#d0d0d0; }
+  #gdPlayPause { min-width:64px; background-color:#404040; color:#d0d0d0; border:1px solid #707070; border-radius:4px; padding:4px 10px; }
+  #gdSlider { flex:1; appearance:none; -webkit-appearance:none; background:transparent; }
+  #gdSlider::-webkit-slider-runnable-track { height:6px; background:#707070; border-radius:3px; }
+  #gdSlider::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; margin-top:-4px; background:#909090; border:1px solid #505050; border-radius:50%; }
+  #gdSlider::-moz-range-track { height:6px; background:#707070; border-radius:3px; }
+  #gdSlider::-moz-range-progress { height:6px; background:#505050; border-radius:3px; }
+  #gdSlider::-moz-range-thumb { width:14px; height:14px; background:#909090; border:1px solid #505050; border-radius:50%; }
+</style>
+<script>
+
+window.onload=function(){
+const canvas=document.getElementById('myCanvas'),ctx=canvas.getContext('2d');
+const gdRGB=c=>'rgb'+c;
+function gdBg(c){ctx.fillStyle=gdRGB(c);ctx.fillRect(0,0,canvas.width,canvas.height);}
+function gdPt(x,y,r,c){ctx.beginPath();ctx.fillStyle=gdRGB(c);ctx.arc(x,y,r,0,2*Math.PI);ctx.fill();}
+function gdLn(x1,y1,x2,y2,c,w){ctx.beginPath();ctx.strokeStyle=gdRGB(c);ctx.lineWidth=w;ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
+function gdCi(x,y,r,c,w,f){ctx.beginPath();if(f)ctx.fillStyle=gdRGB(c);else{ctx.strokeStyle=gdRGB(c);ctx.lineWidth=w;}ctx.arc(x,y,r,0,2*Math.PI);f?ctx.fill():ctx.stroke();}
+function gdPo(v,c,w,f){if(!v.length)return;ctx.beginPath();if(f)ctx.fillStyle=gdRGB(c);else{ctx.strokeStyle=gdRGB(c);ctx.lineWidth=w;}ctx.moveTo(v[0],v[1]);for(let i=2;i<v.length;i+=2)ctx.lineTo(v[i],v[i+1]);ctx.closePath();f?ctx.fill():ctx.stroke();}
+function gdTx(t,x,y,font,size,align,c,f){ctx.font=size+'px '+font;ctx.textAlign=align;ctx.textBaseline='middle';if(f){ctx.fillStyle=gdRGB(c);ctx.fillText(t,x,y);}else{ctx.strokeStyle=gdRGB(c);ctx.strokeText(t,x,y);}}
+gdBg('(0,0,0)');
+
+const gdFrames=[
+function(){gdPo([30.00,30.00,970.00,30.00,970.00,770.00,30.00,770.00],'(128,128,128)',2,0);gdTx('0%',10.00,765.00,'Times',12,'left','(255,255,255)',1);gdTx('0V',35.00,785.00,'Times',12,'left','(255,255,255)',1);gdTx('3.3V',960.00,785.00,'Times',12,'left','(255,255,255)',1);}
+];
+const gdDelay=[0];
+
+let gdCurrent=0,gdPlaying=false,gdTimer=null;
+const gdControls=document.getElementById('gdControls'),gdSlider=document.getElementById('gdSlider'),gdButton=document.getElementById('gdPlayPause');
+function gdUpdateUI(){if(gdFrames.length<2)return;gdSlider.value=gdCurrent;gdButton.textContent=gdPlaying?'Pause':'Play';}
+function gdStop(){gdPlaying=false;if(gdTimer!==null){clearTimeout(gdTimer);gdTimer=null;}gdUpdateUI();}
+function gdShow(n){gdStop();gdBg('(0,0,0)');gdCurrent=Math.max(0,Math.min(n,gdFrames.length-1));for(let i=0;i<=gdCurrent;i++)gdFrames[i]();gdUpdateUI();}
+function gdNext(){if(!gdPlaying)return;if(gdCurrent>=gdFrames.length-1){gdStop();return;}gdCurrent++;gdFrames[gdCurrent]();gdUpdateUI();if(gdCurrent>=gdFrames.length-1){gdStop();return;}gdTimer=setTimeout(gdNext,gdDelay[gdCurrent]);}
+function gdPlay(){if(gdFrames.length<2)return;if(gdCurrent>=gdFrames.length-1)gdShow(0);gdPlaying=true;gdUpdateUI();gdTimer=setTimeout(gdNext,gdDelay[gdCurrent]);}
+if(gdFrames.length){gdFrames[0]();gdUpdateUI();}
+if(gdFrames.length>1){gdSlider.max=gdFrames.length-1;gdControls.style.display='flex';gdSlider.oninput=function(){gdShow(Number(this.value));};gdButton.onclick=function(){gdPlaying?gdStop():gdPlay();};gdPlay();}
+
+};
+</script>
+</head>
+<body style="background-color:#404040;">
+  <canvas id="myCanvas" width="1000" height="800"></canvas>
+  <div id="gdControls"><button id="gdPlayPause" type="button">Pause</button><input id="gdSlider" type="range" min="0" value="0" step="1"></div>
+<p style="font-family:Arial;font-size:10px;color:Gray"><br>&nbsp;Produced by GeoDraw-26.08 C/C++ Library. Author: Conor.McArdle@dcu.ie, 2026</p></body>
+</html>
