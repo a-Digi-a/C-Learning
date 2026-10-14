@@ -28,7 +28,7 @@ function gdTx(t,x,y,font,size,align,c,f){ctx.font=size+'px '+font;ctx.textAlign=
 gdBg('(0,0,0)');
 
 const gdFrames=[
-function(){gdPt(250.00,250.00,1.00,'(255,255,255)');}
+function(){gdCi(250.00,250.00,3.00,'(128,128,128)',1,1);}
 ];
 const gdDelay=[0];
 
