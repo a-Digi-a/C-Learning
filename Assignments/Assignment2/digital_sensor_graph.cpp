@@ -107,7 +107,7 @@ void animate_sensors() {
     gd_pause(50);
   }
   // save graph
-  gd_save("noisy_sensor_graph");
+  gd_save("noisy_sensor_graph.html");
 }
 
 int main() { animate_sensors(); }

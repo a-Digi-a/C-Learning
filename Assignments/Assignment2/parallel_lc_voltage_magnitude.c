@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 double calculate_parallel_lc_voltage(double R, double L, double C, double f) {
-  double B = (2 * M_PI * f * C) - (1 / (2 * M_PI * f * L));
+  const double PI = acos(-1);
+  double B = (2 * PI * f * C) - (1 / (2 * PI * f * L));
   double V = 1 / (sqrt(1 + (pow(R, 2) * pow(B, 2))));
   return V;
 }
